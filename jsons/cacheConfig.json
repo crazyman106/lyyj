@@ -1,0 +1,5 @@
+{
+  "enable": true,
+  "maxAge": 600,
+  "maxCount": 100
+}
