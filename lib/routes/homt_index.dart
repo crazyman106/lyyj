@@ -19,8 +19,7 @@ class HomeIndexState extends State<HomeIndexPage> {
     ];
     return ConstrainedBox(
       constraints: BoxConstraints.expand(),
-      child: Stack(
-        alignment: Alignment.topCenter,
+      child: Column(
         children: <Widget>[
           SizedBox(
             height: MediaQuery.of(context).size.width * .5,
@@ -56,12 +55,47 @@ class HomeIndexState extends State<HomeIndexPage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-            padding: EdgeInsets.only(left: 16, top: 8, right: 32, bottom: 46),
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.only(top: .0, left: 12.0, right: 12.0),
+            padding: EdgeInsets.only(left: 10, top: 16, right: 10, bottom: 10),
+            constraints: BoxConstraints.tightForFinite(width: 400, height: 250),
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "http://file.youdianpinwei.com/ypw/1c0f07ab-201a-410d-bc27-c87a54f21dfc.jpg"))),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.zero,
+                  topRight: Radius.zero,
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      "images/index_product_left.png",
+                      width: 22,
+                      height: 22,
+                    ),
+                    Text(
+                      "   优秀作品展示   ",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Image.asset(
+                      "images/index_product_right.png",
+                      width: 22,
+                      height: 22,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           )
         ],
       ),
