@@ -7,7 +7,7 @@ class LYYJColors{
 
   static const int primaryValue = 0xFFF54548;
   static const int primaryLightValue = 0xFFF94948;
-  static const int primaryDarkValue = 0xDA4548;
+  static const int primaryDarkValue = 0xFFDA4548;
 
   static const int white = 0xFFFFFFFF;
   static const int gray = 0xFF999999;

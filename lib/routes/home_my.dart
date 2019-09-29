@@ -10,14 +10,15 @@ class HomeMyPage extends StatefulWidget {
 class HomeMyState extends State<HomeMyPage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("我的"),
       ),
-      body: new Image(
-          image: new AssetImage("images/main_bottom_found_normal.png"),
-          width: 80.0,
-          height: 80.0)
+      body: Image.network(
+        "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1963559780,1216632413&fm=179&app=42&f=JPEG?w=121&h=140",
+        width: 200,
+        height: 100,
+      ),
     );
   }
 }

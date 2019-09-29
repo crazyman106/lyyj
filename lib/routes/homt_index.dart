@@ -57,9 +57,17 @@ class HomeIndexState extends State<HomeIndexPage> {
           Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(top: .0, left: 12.0, right: 12.0),
-            padding: EdgeInsets.only(left: 10, top: 16, right: 10, bottom: 10),
-            constraints: BoxConstraints.tightForFinite(width: 400, height: 250),
+            padding: EdgeInsets.only(left: 0, top: 16, right: 0, bottom: 10),
+            constraints: BoxConstraints.tightForFinite(width: 400, height: 268),
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    color: Color(0xFFCCCCCC),
+                    offset: Offset(0.0, 5.0),
+                    blurRadius: 8.0,
+                    spreadRadius: -3.0),
+              ],
+              // 边色与边宽度
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.zero,
@@ -94,11 +102,125 @@ class HomeIndexState extends State<HomeIndexPage> {
                     ),
                   ],
                 ),
+                Container(
+                  height: 120,
+                  margin: EdgeInsets.only(top: 14),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: _buildItem,
+                    physics: BouncingScrollPhysics(),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 18),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusDirectional.circular(5)),
+                    elevation: 4,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadiusDirectional.circular(5),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFff5350),
+                            Color(0xFFD32F2F),
+                          ],
+                          begin: FractionalOffset(0, 0),
+                          end: FractionalOffset(0, 1),
+                        ),
+                      ),
+                      child: Container(
+                        width: 220,
+                        height: 55,
+                        child: FlatButton(
+                          child: Text("立即制作",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold,),),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(5)),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.only(top: 16.0, left: 12.0, right: 12.0),
+              padding: EdgeInsets.only(left: 10, top: 16, right: 10, bottom: 0),
+              constraints: BoxConstraints.tightForFinite(
+                  width: 400, height: double.infinity),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0xFFCCCCCC),
+                      offset: Offset(0.0, -5.0),
+                      blurRadius: 8.0,
+                      spreadRadius: -3.0),
+                ],
+                border: new Border(
+                    bottom: BorderSide(color: Color(0xFFFFFFFF), width: 0),
+                    left: BorderSide(color: Color(0xFFE9E9E9), width: 0.5),
+                    right: BorderSide(color: Color(0xFFE9E9E9), width: 0.5),
+                    top: BorderSide(color: Color(0xFFE9E9E9), width: 0.5)),
+                // 边色与边宽度
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.zero,
+                    bottomRight: Radius.zero,
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8)),
+              ),
             ),
           )
         ],
       ),
     );
+  }
+
+  Widget _buildItem(BuildContext context, int index) {
+    return Container(
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(8)),
+        elevation: 4,
+        margin: _insetsGeometry(index),
+        child: Container(
+          width: 160,
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadiusDirectional.circular(8),
+            image: DecorationImage(
+              alignment: Alignment.topRight,
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                  'http://file.youdianpinwei.com/ypw/1c0f07ab-201a-410d-bc27-c87a54f21dfc.jpg'),
+            ),
+          ),
+          child: Container(
+            width: 160,
+            height: 100,
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusDirectional.circular(8)),
+              onPressed: () {},
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  EdgeInsetsGeometry _insetsGeometry(int index) {
+    if (index == 0)
+      return EdgeInsets.only(left: 0, top: 10.0, right: 5.0, bottom: 10);
+    if (index == 4)
+      return EdgeInsets.only(left: 5, top: 10.0, right: 0.0, bottom: 10);
+    else
+      return EdgeInsets.only(left: 5, top: 10.0, right: 5.0, bottom: 10);
   }
 }

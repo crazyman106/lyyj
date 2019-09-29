@@ -145,28 +145,45 @@ class _TabBarState extends State<TabBarWidget>
 
     ///底部tab bar
     return new Scaffold(
-        drawer: _drawer,
-        appBar:
-            null /*new AppBar(
+      drawer: _drawer,
+      appBar:
+          null /*new AppBar(
           backgroundColor: Theme.of(context).primaryColor,
           title: widget.title,
         )*/
-        ,
-        body: new PageView(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: _tabViews,
-          onPageChanged: (index) {
-            _tabController.animateTo(index);
-            _onPageChanged?.call(index);
-          },
-        ),
-        bottomNavigationBar: new Material(
-          //为了适配主题风格，包一层Material实现风格套用
-          color: /*Theme.of(context).primaryColor*/ Color(LYYJColors.white),
-          //底部导航栏主题颜色
-          child: new SafeArea(
-            child: new TabBar(
+      ,
+      body: new PageView(
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
+        children: _tabViews,
+        onPageChanged: (index) {
+          _tabController.animateTo(index);
+          _onPageChanged?.call(index);
+        },
+      ),
+      bottomNavigationBar: new Material(
+        //为了适配主题风格，包一层Material实现风格套用
+        color: /*Theme.of(context).primaryColor*/ Color(LYYJColors.white),
+        //底部导航栏主题颜色
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Color(0xFFCCCCCC),
+                  offset: Offset(0.0, -5.0),
+                  blurRadius: 8.0,
+                  spreadRadius: -5.0),
+            ],
+            // 边色与边宽度
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.zero,
+                bottomRight: Radius.zero,
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8)),
+          ),
+          child: SafeArea(
+            child: TabBar(
               //TabBar导航标签，底部导航放到Scaffold的bottomNavigationBar中
               controller: _tabController,
               //配置控制器
@@ -183,7 +200,9 @@ class _TabBarState extends State<TabBarWidget>
               }, //tab标签的下划线颜色
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
