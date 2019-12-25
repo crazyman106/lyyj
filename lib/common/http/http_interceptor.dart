@@ -1,4 +1,5 @@
-import 'package:connectivity/connectivity.dart';
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:lyyj/index.dart';
 
@@ -22,17 +23,20 @@ class HttpInterceptors extends Interceptor {
   @override
   FutureOr<dynamic> onRequest(RequestOptions options) async {
     // 配置超时
-    options.connectTimeout = 15000;
+    options.connectTimeout = 8000;
     // 配置打印数据
     if (!Global.isRelease) {
+      print("Flutter_Http:请求base_url：${options.baseUrl}");
       print("Flutter_Http:请求url：${options.path}");
       print('Flutter_Http:请求头: ' + options.headers.toString());
+      print('Flutter_Http:请求参数: ' + options.queryParameters.toString());
+
       if (options.data != null) {
-        print('Flutter_Http:请求参数: ' + options.data.toString());
+        print('Flutter_Http:请求参数: ' + options.queryParameters.toString());
       }
     }
     //配置无网络时的数据
-    var connectivityResult = await (new Connectivity().checkConnectivity());
+    /*var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       var responseData = LYYJResponse();
       responseData.Data = null;
@@ -42,7 +46,7 @@ class HttpInterceptors extends Interceptor {
       return (httpClient as HttpClient)
           .dio
           .resolve(Response(data: responseData));
-    }
+    }*/
     // 配置缓存
     if (!Global.profile.cache.enable) return options;
     // refresh标记是否是"下拉刷新"
@@ -79,23 +83,42 @@ class HttpInterceptors extends Interceptor {
     // 错误状态不缓存
     if (!Global.isRelease) {
       print('Flutter_Http:请求异常: ' + err.toString());
-      print('Flutter_Http:请求异常信息: ' + err.response?.toString() ?? "");
+      print('Flutter_Http:请求异常信息: '+ err.response?.toString()??"");
     }
   }
 
   @override
   onResponse(Response response) {
     // 如果启用缓存，将返回结果保存到缓存
-    if (Global.profile.cache.enable) {
-      _saveCache(response);
-    }
     if (!Global.isRelease) {
       print('Flutter_Http:返回参数: ' + response.toString());
     }
+    if (response.request.baseUrl == TBZApi.BASE_URL) {
+      print("onResponse:");
+      LYYJResponse res = LYYJResponse();
+      if (response.data["success"]) {
+        res.Code = 1;
+        res.Message = "数据返回成功";
+        res.Data = response.data["data"]["data"];
+      } else {
+        res.Code = -1;
+        res.Message = response.data["data"]["message"];
+        res.Data = null;
+      }
+      response.data = res;
+      print("onResponse:"+json.encode(response.data));
+      return response;
+    }
+//    if (Global.profile.cache.enable) {
+//      _saveCache(response);
+//    }
   }
 
   void _saveCache(Response response) {
     RequestOptions options = response.request;
+    if (response.data["Code"] != 1) {
+      return;
+    }
     if (options.extra["noCache"] != true &&
         options.method.toLowerCase() == "get") {
       // 如果缓存数量超过最大数量限制，则先移除最早的一条记录

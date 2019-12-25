@@ -14,8 +14,8 @@ import 'routes/home.dart';
 
 void main() {
   runZoned(() {
-    runApp(MyApp());
-    PaintingBinding.instance.imageCache.maximumSize = 100;
+    WidgetsFlutterBinding.ensureInitialized();
+    Global.init().then((e)=> runApp(MyApp()));
     Provider.debugCheckInvalidValueType = null;
   }, onError: (Object obj, StackTrace stack) {
     print(obj);

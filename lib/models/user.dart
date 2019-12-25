@@ -6,14 +6,16 @@ part 'user.g.dart';
 class User {
   User();
 
-// 命名构造函数
-  User.empty();
-
   String token;
   String username;
   String avator;
   String mobile;
   String birthday;
+  @JsonKey(name:"UID")
+  int uid;
+
+  // 命名构造函数
+  User.empty();
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

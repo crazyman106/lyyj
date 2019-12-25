@@ -55,10 +55,10 @@ class HomeIndexState extends State<HomeIndexPage> {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(top: .0, left: 12.0, right: 12.0),
             padding: EdgeInsets.only(left: 0, top: 16, right: 0, bottom: 10),
-            constraints: BoxConstraints.tightForFinite(width: 400, height: 268),
+            constraints: BoxConstraints.tightForFinite(
+                width: MediaQuery.of(context).size.width, height: 268),
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -134,7 +134,14 @@ class HomeIndexState extends State<HomeIndexPage> {
                         width: 220,
                         height: 55,
                         child: FlatButton(
-                          child: Text("立即制作",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold,),),
+                          child: Text(
+                            "立即制作",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadiusDirectional.circular(5)),
@@ -149,12 +156,13 @@ class HomeIndexState extends State<HomeIndexPage> {
           ),
           Expanded(
             child: Container(
-              width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.only(top: 16.0, left: 12.0, right: 12.0),
               padding: EdgeInsets.only(left: 10, top: 16, right: 10, bottom: 0),
               constraints: BoxConstraints.tightForFinite(
-                  width: 400, height: double.infinity),
+                  width: MediaQuery.of(context).size.width,
+                  height: double.infinity),
               decoration: BoxDecoration(
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                       color: Color(0xFFCCCCCC),
@@ -162,18 +170,159 @@ class HomeIndexState extends State<HomeIndexPage> {
                       blurRadius: 8.0,
                       spreadRadius: -3.0),
                 ],
-                border: new Border(
+                /* border: new Border(
                     bottom: BorderSide(color: Color(0xFFFFFFFF), width: 0),
                     left: BorderSide(color: Color(0xFFE9E9E9), width: 0.5),
                     right: BorderSide(color: Color(0xFFE9E9E9), width: 0.5),
-                    top: BorderSide(color: Color(0xFFE9E9E9), width: 0.5)),
+                    top: BorderSide(color: Color(0xFFE9E9E9), width: 0.5)),*/
                 // 边色与边宽度
-                color: Colors.white,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.zero,
                     bottomRight: Radius.zero,
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8)),
+              ),
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Card(
+                            margin: EdgeInsets.all(0),
+                            elevation: 4,
+                            child: Container(
+                              width:
+                                  (MediaQuery.of(context).size.width - 54) / 2,
+                              height: 55.0,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(5),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFF799B9),
+                                    Color(0xFFFA6799),
+                                  ],
+                                  begin: FractionalOffset(0, 0),
+                                  end: FractionalOffset(0, 1),
+                                ),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  "妈妈与美丽",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                          Card(
+                            margin: EdgeInsets.only(left: 10),
+                            elevation: 4,
+                            child: Container(
+                              width:
+                                  (MediaQuery.of(context).size.width - 54) / 2,
+                              height: 55.0,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(5),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF87ABE7),
+                                    Color(0xFF628ECF),
+                                  ],
+                                  begin: FractionalOffset(0, 0),
+                                  end: FractionalOffset(0, 1),
+                                ),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  "妈妈与旅游",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Card(
+                            margin: EdgeInsets.all(0),
+                            elevation: 4,
+                            child: Container(
+                              width:
+                                  (MediaQuery.of(context).size.width - 54) / 2,
+                              height: 55.0,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(5),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF80DBD2),
+                                    Color(0xFF4FD5CB),
+                                  ],
+                                  begin: FractionalOffset(0, 0),
+                                  end: FractionalOffset(0, 1),
+                                ),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  "妈妈与健康",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                          Card(
+                            margin: EdgeInsets.only(left: 10),
+                            elevation: 4,
+                            child: Container(
+                              width:
+                                  (MediaQuery.of(context).size.width - 54) / 2,
+                              height: 55.0,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(5),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFF9C945),
+                                    Color(0xFFFFBE03),
+                                  ],
+                                  begin: FractionalOffset(0, 0),
+                                  end: FractionalOffset(0, 1),
+                                ),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  "经典故事",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           )
@@ -206,7 +355,7 @@ class HomeIndexState extends State<HomeIndexPage> {
             height: 100,
             child: FlatButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusDirectional.circular(8)),
+                  borderRadius: BorderRadiusDirectional.circular(5)),
               onPressed: () {},
             ),
           ),
@@ -217,9 +366,9 @@ class HomeIndexState extends State<HomeIndexPage> {
 
   EdgeInsetsGeometry _insetsGeometry(int index) {
     if (index == 0)
-      return EdgeInsets.only(left: 0, top: 10.0, right: 5.0, bottom: 10);
+      return EdgeInsets.only(left: 10.0, top: 10.0, right: 5.0, bottom: 10);
     if (index == 4)
-      return EdgeInsets.only(left: 5, top: 10.0, right: 0.0, bottom: 10);
+      return EdgeInsets.only(left: 5, top: 10.0, right: 10.0, bottom: 10);
     else
       return EdgeInsets.only(left: 5, top: 10.0, right: 5.0, bottom: 10);
   }
